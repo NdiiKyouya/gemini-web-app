@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <title>Gemini AI Web</title>
+</head>
+<body>
+    <h1>Tanya Gemini</h1>
+    <input type="text" id="userInput" placeholder="Ketik pesan...">
+    <button onclick="kirimPesan()">Kirim</button>
+    <p id="respon"></p>
+
+    <script>
+        async function kirimPesan() {
+            const prompt = document.getElementById('userInput').value;
+            const responElement = document.getElementById('respon');
+            responElement.innerText = "Sedang berpikir...";
+
+            // URL ini nanti didapat dari Vercel di Langkah 3
+            const VERCEL_URL = "https://nama-proyek-anda.vercel.app/api/gemini";
+
+            const response = await fetch(VERCEL_URL, {
+                method: 'POST',
+                body: JSON.stringify({ prompt: prompt })
+            });
+            const data = await response.json();
+            responElement.innerText = data.text;
+        }
+    </script>
+</body>
+</html>
